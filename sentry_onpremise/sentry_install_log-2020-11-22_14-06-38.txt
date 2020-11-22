@@ -1,0 +1,410 @@
+Checking minimum requirements...
+
+Creating volumes for persistent storage...
+Created sentry-data.
+Created sentry-postgres.
+Created sentry-redis.
+Created sentry-zookeeper.
+Created sentry-kafka.
+Created sentry-clickhouse.
+Created sentry-symbolicator.
+
+sentry/sentry.conf.py already exists, skipped creation.
+sentry/config.yml already exists, skipped creation.
+sentry/requirements.txt already exists, skipped creation.
+symbolicator/config.yml already exists, skipped creation.
+relay/config.yml already exists, skipped creation.
+
+Fetching and updating Docker images...
+
+Some service image(s) must be built from source by running:
+    docker-compose build sentry-cleanup ingest-consumer web cron subscription-consumer-events post-process-forwarder symbolicator-cleanup worker subscription-consumer-transactions snuba-cleanup
+nightly-py3: Pulling from getsentry/sentry
+Digest: sha256:965663d754cfe3b4470b7f0a594d804269e3b914fe30bd15ae04b629ea9170d9
+Status: Image is up to date for getsentry/sentry:nightly-py3
+docker.io/getsentry/sentry:nightly-py3
+
+Building and tagging Docker images...
+
+Building web
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Successfully tagged sentry-onpremise-local:latest
+smtp uses an image, skipping
+memcached uses an image, skipping
+redis uses an image, skipping
+postgres uses an image, skipping
+zookeeper uses an image, skipping
+kafka uses an image, skipping
+clickhouse uses an image, skipping
+snuba-api uses an image, skipping
+snuba-consumer uses an image, skipping
+snuba-outcomes-consumer uses an image, skipping
+snuba-sessions-consumer uses an image, skipping
+snuba-transactions-consumer uses an image, skipping
+snuba-replacer uses an image, skipping
+snuba-subscription-consumer-events uses an image, skipping
+snuba-subscription-consumer-transactions uses an image, skipping
+symbolicator uses an image, skipping
+relay uses an image, skipping
+nginx uses an image, skipping
+Building snuba-cleanup                      ... 
+Building symbolicator-cleanup               ... 
+Building web                                ... 
+Building cron                               ... 
+Building worker                             ... 
+Building ingest-consumer                    ... 
+Building post-process-forwarder             ... 
+Building subscription-consumer-events       ... 
+Building subscription-consumer-transactions ... 
+Building sentry-cleanup                     ... 
+Building web
+Building sentry-cleanup
+Building cron
+Building symbolicator-cleanup
+Building subscription-consumer-events
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Successfully tagged sentry-onpremise-local:latest
+Building subscription-consumer-events       ... done
+Building worker
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+Successfully tagged sentry-onpremise-local:latest
+ ---> 7e534b5b5ea6
+Step 3/5 : RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*Building web                                ... done
+
+Building ingest-consumer
+Step 1/5 : ARG BASE_IMAGE ---> Using cache
+Step 1/5 : ARG SENTRY_IMAGE ---> 12eb87249015
+
+Step 4/5 : COPY entrypoint.sh /entrypoint.shStep 2/5 : ARG SENTRY_PYTHON3
+
+ ---> Using cache
+
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3} ---> 685e0ae6a511
+
+Step 5/5 : ENTRYPOINT ["/entrypoint.sh"] ---> 843c460c127e
+
+Step 4/5 : COPY . /usr/src/sentry ---> Using cache
+
+ ---> 05e3ca7df5f2
+ ---> Using cache
+
+ ---> 48a4b2d464a8
+Successfully built 05e3ca7df5f2
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fiStep 2/5 : FROM ${BASE_IMAGE}
+ ---> Using cache
+
+ ---> 7e534b5b5ea6
+ ---> 061bbea92d39
+
+Step 3/5 : RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*Successfully built 7e534b5b5ea6
+
+ ---> Using cache
+ ---> abc36c056e26
+Step 4/5 : COPY entrypoint.sh /entrypoint.sh
+ ---> Using cache
+ ---> d5910d14d710
+Step 5/5 : ENTRYPOINT ["/entrypoint.sh"]
+ ---> Using cache
+ ---> b993b1fda163
+
+Successfully tagged sentry-cleanup-onpremise-local:latest
+Successfully built b993b1fda163
+Successfully tagged symbolicator-cleanup-onpremise-local:latest
+Building sentry-cleanup                     ... done
+Successfully tagged sentry-onpremise-local:latest
+Building subscription-consumer-transactions
+Building symbolicator-cleanup               ... done
+Building cron                               ... done
+Building snuba-cleanup
+Building post-process-forwarder
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Successfully tagged sentry-onpremise-local:latest
+Building worker                             ... done
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Successfully tagged sentry-onpremise-local:latest
+Building ingest-consumer                    ... done
+Step 1/5 : ARG SENTRY_IMAGE
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentry
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Step 1/5 : ARG BASE_IMAGE
+Step 2/5 : FROM ${BASE_IMAGE}
+ ---> af49ed5b77c0
+Step 3/5 : RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*Successfully tagged sentry-onpremise-local:latest
+
+ ---> Using cache
+ ---> 6392b41f49f9
+Step 4/5 : COPY entrypoint.sh /entrypoint.shBuilding subscription-consumer-transactions ... done
+
+ ---> Using cache
+ ---> 504cfe98fdc4
+Step 5/5 : ENTRYPOINT ["/entrypoint.sh"]
+ ---> Using cache
+ ---> c3d842d1a0c1
+Step 1/5 : ARG SENTRY_IMAGE
+
+Successfully built c3d842d1a0c1
+Step 2/5 : ARG SENTRY_PYTHON3
+Step 3/5 : FROM ${SENTRY_IMAGE}${SENTRY_PYTHON3:+-py3}
+ ---> 843c460c127e
+Step 4/5 : COPY . /usr/src/sentrySuccessfully tagged snuba-cleanup-onpremise-local:latest
+
+Building snuba-cleanup                      ... done
+ ---> Using cache
+ ---> 48a4b2d464a8
+Step 5/5 : RUN if [ -s /usr/src/sentry/requirements.txt ]; then pip install -r /usr/src/sentry/requirements.txt; fi
+ ---> Using cache
+ ---> 7e534b5b5ea6
+
+Successfully built 7e534b5b5ea6
+Successfully tagged sentry-onpremise-local:latest
+Building post-process-forwarder             ... done
+
+Docker images built.
+Removing network onpremise_some-net
+Network onpremise_some-net not found.
+Removing sentry_onpremise_snuba-transactions-consumer_1 ... 
+Removing sentry_onpremise_snuba-api_1                   ... 
+Removing sentry_onpremise_snuba-outcomes-consumer_1     ... 
+Removing sentry_onpremise_snuba-replacer_1              ... 
+Removing sentry_onpremise_snuba-sessions-consumer_1     ... 
+Removing sentry_onpremise_snuba-consumer_1              ... 
+Removing sentry_onpremise_symbolicator_1                ... 
+Removing sentry_onpremise_postgres_1                    ... 
+Removing sentry_onpremise_smtp_1                        ... 
+Removing sentry_onpremise_memcached_1                   ... 
+Removing sentry_onpremise_kafka_1                       ... 
+Removing sentry_onpremise_clickhouse_1                  ... 
+Removing sentry_onpremise_zookeeper_1                   ... 
+Removing sentry_onpremise_redis_1                       ... 
+Removing sentry_onpremise_clickhouse_1                  ... done
+Removing sentry_onpremise_snuba-sessions-consumer_1     ... done
+Removing sentry_onpremise_memcached_1                   ... done
+Removing sentry_onpremise_snuba-outcomes-consumer_1     ... done
+Removing sentry_onpremise_snuba-transactions-consumer_1 ... done
+Removing sentry_onpremise_snuba-api_1                   ... done
+Removing sentry_onpremise_redis_1                       ... done
+Removing sentry_onpremise_zookeeper_1                   ... done
+Removing sentry_onpremise_snuba-consumer_1              ... done
+Removing sentry_onpremise_snuba-replacer_1              ... done
+Removing sentry_onpremise_postgres_1                    ... done
+Removing sentry_onpremise_symbolicator_1                ... done
+Removing sentry_onpremise_smtp_1                        ... done
+Removing sentry_onpremise_kafka_1                       ... done
+Removing network sentry_onpremise_some-net
+Creating network "sentry_onpremise_some-net" with driver "bridge"
+Bootstrapping and migrating Snuba...
+Creating sentry_onpremise_zookeeper_1 ... 
+Creating sentry_onpremise_clickhouse_1 ... 
+Creating sentry_onpremise_redis_1      ... 
+Creating sentry_onpremise_redis_1      ... done
+Creating sentry_onpremise_clickhouse_1 ... done
+Creating sentry_onpremise_zookeeper_1  ... done
+Creating sentry_onpremise_kafka_1      ... 
+Creating sentry_onpremise_kafka_1      ... done
++ '[' b = - ']'
++ snuba bootstrap --help
++ set -- snuba bootstrap --no-migrate --force
++ set gosu snuba snuba bootstrap --no-migrate --force
++ exec gosu snuba snuba bootstrap --no-migrate --force
+%3|1606050424.586|FAIL|rdkafka#producer-1| [thrd:kafka:9092/bootstrap]: kafka:9092/bootstrap: Connect to ipv4#172.30.0.5:9092 failed: Connection refused (after 0ms in state CONNECT)
+%3|1606050425.586|FAIL|rdkafka#producer-1| [thrd:kafka:9092/bootstrap]: kafka:9092/bootstrap: Connect to ipv4#172.30.0.5:9092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) suppressed)
+2020-11-22 13:07:05,586 Connection to Kafka failed (attempt 0)
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 55, in bootstrap
+    client.list_topics(timeout=1)
+cimpl.KafkaException: KafkaError{code=_TRANSPORT,val=-195,str="Failed to get metadata: Local: Broker transport failure"}
+%3|1606050426.588|FAIL|rdkafka#producer-2| [thrd:kafka:9092/bootstrap]: kafka:9092/bootstrap: Connect to ipv4#172.30.0.5:9092 failed: Connection refused (after 0ms in state CONNECT)
+%3|1606050427.588|FAIL|rdkafka#producer-2| [thrd:kafka:9092/bootstrap]: kafka:9092/bootstrap: Connect to ipv4#172.30.0.5:9092 failed: Connection refused (after 0ms in state CONNECT, 1 identical error(s) suppressed)
+2020-11-22 13:07:07,589 Connection to Kafka failed (attempt 1)
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 55, in bootstrap
+    client.list_topics(timeout=1)
+cimpl.KafkaException: KafkaError{code=_TRANSPORT,val=-195,str="Failed to get metadata: Local: Broker transport failure"}
+2020-11-22 13:07:08,740 Failed to create topic ingest-sessions
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'ingest-sessions' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic cdc
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'cdc' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic outcomes
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'outcomes' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic events
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'events' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic event-replacements
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'event-replacements' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic snuba-commit-log
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'snuba-commit-log' already exists."}
+2020-11-22 13:07:08,741 Failed to create topic errors-replacements
+Traceback (most recent call last):
+  File "/usr/src/snuba/snuba/cli/bootstrap.py", line 91, in bootstrap
+    future.result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+cimpl.KafkaException: KafkaError{code=TOPIC_ALREADY_EXISTS,val=36,str="Topic 'errors-replacements' already exists."}
+Starting sentry_onpremise_redis_1 ... 
+Starting sentry_onpremise_redis_1 ... done
+Starting sentry_onpremise_zookeeper_1 ... 
+Starting sentry_onpremise_clickhouse_1 ... 
+Starting sentry_onpremise_zookeeper_1  ... done
+Starting sentry_onpremise_clickhouse_1 ... done
+Starting sentry_onpremise_kafka_1      ... 
+Starting sentry_onpremise_kafka_1      ... done
++ '[' m = - ']'
++ snuba migrations --help
++ set -- snuba migrations migrate --force
++ set gosu snuba snuba migrations migrate --force
++ exec gosu snuba snuba migrations migrate --force
+Finished running migrations
+
+
+Setting up database...
+Starting sentry_onpremise_zookeeper_1 ... 
+Creating sentry_onpremise_postgres_1  ... 
+Starting sentry_onpremise_zookeeper_1 ... done
+Starting sentry_onpremise_redis_1     ... 
+Starting sentry_onpremise_clickhouse_1 ... 
+Creating sentry_onpremise_memcached_1  ... 
+Creating sentry_onpremise_symbolicator_1 ... 
+Starting sentry_onpremise_clickhouse_1   ... done
+Creating sentry_onpremise_smtp_1         ... 
+Starting sentry_onpremise_redis_1        ... done
+Starting sentry_onpremise_kafka_1        ... 
+Starting sentry_onpremise_kafka_1        ... done
+Creating sentry_onpremise_snuba-sessions-consumer_1 ... 
+Creating sentry_onpremise_snuba-api_1               ... 
+Creating sentry_onpremise_snuba-outcomes-consumer_1 ... 
+Creating sentry_onpremise_snuba-replacer_1          ... 
+Creating sentry_onpremise_snuba-consumer_1          ... 
+Creating sentry_onpremise_snuba-transactions-consumer_1 ... 
+Creating sentry_onpremise_smtp_1                        ... done
+Creating sentry_onpremise_snuba-sessions-consumer_1     ... done
+Creating sentry_onpremise_memcached_1                   ... done
+Creating sentry_onpremise_postgres_1                    ... done
+Creating sentry_onpremise_symbolicator_1                ... done
+Creating sentry_onpremise_snuba-outcomes-consumer_1     ... done
+Creating sentry_onpremise_snuba-api_1                   ... done
+Creating sentry_onpremise_snuba-replacer_1              ... done
+Creating sentry_onpremise_snuba-transactions-consumer_1 ... done
+Creating sentry_onpremise_snuba-consumer_1              ... done
+13:07:19 [WARNING] sentry.utils.geo: settings.GEOIP_PATH_MMDB not configured.
+13:07:22 [INFO] sentry.plugins.github: apps-not-configured
+[36;1mOperations to perform:[0m
+[1m  Apply all migrations: [0madmin, auth, contenttypes, jira_ac, nodestore, sentry, sessions, sites, social_auth
+[36;1mRunning migrations:[0m
+  No migrations to apply.
+Creating missing DSNs
+Correcting Group.num_comments counter
+
+----------------
+You're all done! Run the following command to get Sentry running:
+
+  docker-compose up -d
+
