@@ -1,0 +1,49 @@
+version: '3.4'
+
+networks:
+  sentry_onpremise_some-net:
+    external: true
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  template:
+    image: microservice_template:1.0.0
+    container_name: template
+    networks:
+      - sentry_onpremise_some-net 
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    expose:
+      - "8090"
+  mysql:
+      image: mysql:5.7
+      networks:
+        - sentry_onpremise_some-net 
+      volumes:
+        - mysql_data:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: keycloak
+        MYSQL_USER: keycloak
+        MYSQL_PASSWORD: password
+  keycloak:
+      image: quay.io/keycloak/keycloak:latest
+      networks:
+        - sentry_onpremise_some-net 
+      environment:
+        DB_VENDOR: MYSQL
+        DB_ADDR: mysql
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: Pa55w0rd
+      ports:
+        - 8080:8080
+      depends_on:
+        - mysql

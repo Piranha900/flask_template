@@ -1,0 +1,5 @@
+{
+  "rsyslog_host": "localhost",
+  "rsyslog_port": 514,
+  "sentry_dns" : "http://06d11d356d264cd3a65a2449ff419ba6@sentry_onpremise_nginx_1:80/2"
+}
